@@ -101,8 +101,8 @@ export const Hero = () => {
                                     radius="full"
                                     size="lg"
                                     classNames={{
-                                        inputWrapper: "h-16 border-indigo-100 hover:border-indigo-300 focus-within:!border-indigo-500 transition-all px-6",
-                                        input: "text-lg placeholder:text-gray-300",
+                                        inputWrapper: "h-20 border-indigo-100 hover:border-indigo-300 focus-within:!border-indigo-500 transition-all px-8",
+                                        input: "text-xl placeholder:text-gray-300",
                                     }}
                                 />
                             </div>
@@ -110,7 +110,7 @@ export const Hero = () => {
                                 color="primary"
                                 radius="full"
                                 size="lg"
-                                className="h-16 px-10 font-bold text-lg text-white bg-gradient-to-r from-indigo-600 to-blue-600 shadow-xl shadow-indigo-200/50 hover:scale-[1.02] transition-transform"
+                                className="h-20 px-12 font-bold text-xl text-white bg-gradient-to-r from-indigo-600 to-blue-600 shadow-xl shadow-indigo-200/50 hover:scale-[1.02] transition-transform"
                                 endContent={<ArrowRight className="w-5 h-5" />}
                                 startContent={<Sparkles className="w-5 h-5" />}
                             >
