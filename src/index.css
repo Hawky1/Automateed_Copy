@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #4F46E5;
+  --color-secondary: #9333EA;
+  --color-variant-blue: #3B82F6;
+  --color-variant-purple: #7C3AED;
+}
+
+@layer base {
+  body {
+    @apply bg-[#FAFAFC] text-[#1D1D1F] font-sans antialiased;
+  }
+}
+
+.glass {
+  @apply bg-white/70 backdrop-blur-md border border-white/20;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-variant-blue;
+}
