@@ -1,15 +1,50 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #4F46E5;
-  --color-secondary: #9333EA;
-  --color-variant-blue: #3B82F6;
-  --color-variant-purple: #7C3AED;
+  --radius: 0.5rem;
+  
+  --color-background: hsl(240 10% 98%);
+  --color-foreground: hsl(222.2 84% 4.9%);
+  
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(222.2 84% 4.9%);
+  
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(222.2 84% 4.9%);
+  
+  --color-primary: hsl(243 75% 59%);
+  --color-primary-foreground: hsl(210 40% 98%);
+  
+  --color-secondary: hsl(270 75% 60%);
+  --color-secondary-foreground: hsl(222.2 47.4% 11.2%);
+  
+  --color-muted: hsl(210 40% 96.1%);
+  --color-muted-foreground: hsl(215.4 16.3% 46.9%);
+  
+  --color-accent: hsl(210 40% 96.1%);
+  --color-accent-foreground: hsl(222.2 47.4% 11.2%);
+  
+  --color-destructive: hsl(0 84.2% 60.2%);
+  --color-destructive-foreground: hsl(210 40% 98%);
+  
+  --color-border: hsl(214.3 31.8% 91.4%);
+  --color-input: hsl(214.3 31.8% 91.4%);
+  --color-ring: hsl(243 75% 59%);
+  
+  --color-indigo-600: hsl(243 75% 59%);
+  --color-purple-500: hsl(270 75% 60%);
+  --color-pink-500: hsl(330 75% 60%);
+  --color-yellow-400: hsl(48 96% 53%);
+  --color-emerald-500: hsl(160 84% 39%);
 }
 
 @layer base {
+  * {
+    @apply border-border;
+  }
+  
   body {
-    @apply bg-[#FAFAFC] text-[#1D1D1F] font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased;
   }
 }
 
@@ -18,5 +53,5 @@
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-variant-blue;
+  @apply bg-clip-text text-transparent bg-linear-to-r from-primary via-secondary to-indigo-600;
 }
