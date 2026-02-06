@@ -98,7 +98,7 @@ export const Hero = () => {
                                     type="text"
                                     placeholder={`e.g., ${placeholder}`}
                                     variant="bordered"
-                                    radius="lg"
+                                    radius="full"
                                     size="lg"
                                     classNames={{
                                         inputWrapper: "h-16 border-indigo-100 hover:border-indigo-300 focus-within:!border-indigo-500 transition-all px-6",
@@ -108,7 +108,7 @@ export const Hero = () => {
                             </div>
                             <Button
                                 color="primary"
-                                radius="lg"
+                                radius="full"
                                 size="lg"
                                 className="h-16 px-10 font-bold text-lg text-white bg-gradient-to-r from-indigo-600 to-blue-600 shadow-xl shadow-indigo-200/50 hover:scale-[1.02] transition-transform"
                                 endContent={<ArrowRight className="w-5 h-5" />}
