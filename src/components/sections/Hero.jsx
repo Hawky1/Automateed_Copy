@@ -1,8 +1,49 @@
-import React from 'react';
-import { Play, Sparkles, Plus, Star, BookOpen } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { Play, Sparkles, Plus, Star, BookOpen, ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Button, Input } from "@heroui/react";
 
 export const Hero = () => {
+    const [placeholder, setPlaceholder] = useState('');
+    const ideas = [
+        "Self-Improvement",
+        "Artificial Intelligence",
+        "Healthy Cooking",
+        "Travel Guide",
+        "Digital Marketing",
+        "Children's Story"
+    ];
+    const [ideaIndex, setIdeaIndex] = useState(0);
+    const [charIndex, setCharIndex] = useState(0);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [typingSpeed, setTypingSpeed] = useState(150);
+
+    useEffect(() => {
+        const handleTyping = () => {
+            const currentIdea = ideas[ideaIndex];
+            if (isDeleting) {
+                setPlaceholder(currentIdea.substring(0, charIndex - 1));
+                setCharIndex(prev => prev - 1);
+                setTypingSpeed(50);
+            } else {
+                setPlaceholder(currentIdea.substring(0, charIndex + 1));
+                setCharIndex(prev => prev + 1);
+                setTypingSpeed(150);
+            }
+
+            if (!isDeleting && charIndex === currentIdea.length) {
+                setTimeout(() => setIsDeleting(true), 1500);
+            } else if (isDeleting && charIndex === 0) {
+                setIsDeleting(false);
+                setIdeaIndex((prev) => (prev + 1) % ideas.length);
+                setTypingSpeed(500);
+            }
+        };
+
+        const timer = setTimeout(handleTyping, typingSpeed);
+        return () => clearTimeout(timer);
+    }, [charIndex, isDeleting, ideaIndex]);
+
     return (
         <section className="relative pt-40 pb-20 overflow-hidden">
             {/* Background Orbs */}
@@ -45,28 +86,39 @@ export const Hero = () => {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="max-w-3xl mx-auto relative group"
                 >
-                    <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"></div>
-                    <div className="relative bg-white rounded-3xl p-8 sm:p-12 shadow-2xl border border-indigo-50">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-8 flex items-center justify-center gap-2">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-3xl blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+                    <div className="relative bg-white rounded-[32px] p-8 sm:p-12 shadow-2xl border border-indigo-50/50">
+                        <h3 className="text-3xl font-bold text-[#111827] mb-10">
                             What do you want to create today?
                         </h3>
 
-                        <div className="flex flex-col sm:flex-row gap-4">
-                            <div className="flex-1 relative">
-                                <input
+                        <div className="flex flex-col sm:flex-row items-center gap-4 bg-white">
+                            <div className="flex-1 w-full">
+                                <Input
                                     type="text"
-                                    placeholder="e.g., Building Healthy Habits"
-                                    className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all text-lg"
+                                    placeholder={`e.g., ${placeholder}`}
+                                    variant="bordered"
+                                    radius="lg"
+                                    size="lg"
+                                    classNames={{
+                                        inputWrapper: "h-16 border-indigo-100 hover:border-indigo-300 focus-within:!border-indigo-500 transition-all px-6",
+                                        input: "text-lg placeholder:text-gray-300",
+                                    }}
                                 />
                             </div>
-                            <button className="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white px-8 py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 shadow-lg shadow-indigo-100 hover:shadow-indigo-200 transition-all hover:-translate-y-1">
-                                <Sparkles className="w-5 h-5" />
+                            <Button
+                                color="primary"
+                                radius="lg"
+                                size="lg"
+                                className="h-16 px-10 font-bold text-lg text-white bg-gradient-to-r from-indigo-600 to-blue-600 shadow-xl shadow-indigo-200/50 hover:scale-[1.02] transition-transform"
+                                endContent={<ArrowRight className="w-5 h-5" />}
+                                startContent={<Sparkles className="w-5 h-5" />}
+                            >
                                 Start Free
-                                <span className="ml-1">→</span>
-                            </button>
+                            </Button>
                         </div>
 
-                        <p className="mt-4 text-sm text-gray-400 font-medium">
+                        <p className="mt-6 text-sm text-gray-400 font-medium">
                             Optional: Leave blank if you're not sure yet
                         </p>
                     </div>
@@ -89,18 +141,18 @@ export const Hero = () => {
                     </div>
                 </motion.div>
 
-                {/* Action Buttons */}
-                <div className="mt-12 space-y-8">
+                {/* Social Proof */}
+                <div className="mt-16 space-y-10">
                     <p className="text-sm font-medium text-gray-400">No credit card required.</p>
 
-                    <button className="inline-flex items-center gap-3 bg-white border border-gray-200 px-8 py-4 rounded-full text-lg font-bold text-gray-700 hover:bg-gray-50 transition-all shadow-sm">
+                    <button className="inline-flex items-center gap-3 bg-white border border-gray-100 px-8 py-4 rounded-full text-lg font-bold text-gray-700 hover:bg-gray-50 transition-all shadow-sm">
                         <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
                             <Play className="w-4 h-4 fill-gray-700 text-gray-700 ml-0.5" />
                         </div>
                         Watch Demo
                     </button>
 
-                    <div className="bg-white/80 backdrop-blur-sm border border-gray-100 inline-flex items-center gap-4 px-6 py-3 rounded-full shadow-sm mt-8">
+                    <div className="bg-white/80 backdrop-blur-sm border border-gray-100 inline-flex items-center gap-4 px-6 py-3 rounded-full shadow-sm">
                         <div className="flex items-center gap-2">
                             <Sparkles className="w-4 h-4 text-indigo-500" />
                             <span className="text-sm font-bold text-gray-700 whitespace-nowrap">AI-Powered eBook Creation</span>
