@@ -93,7 +93,9 @@ export const Hero = () => {
                         </h3>
 
                         <div className="flex flex-col sm:flex-row items-center gap-4 bg-white">
-                            <div className="flex-1 w-full">
+                            <div className="flex-1 w-full relative">
+                                {/* Glow layer */}
+                                <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 opacity-0 blur-md transition-opacity duration-300 peer-focus:opacity-70 pointer-events-none glow-wrapper" />
                                 <Input
                                     type="text"
                                     placeholder={`e.g., ${placeholder}`}
@@ -101,8 +103,9 @@ export const Hero = () => {
                                     radius="full"
                                     size="lg"
                                     classNames={{
-                                        inputWrapper: "h-20 border-indigo-100 hover:border-indigo-300 focus-within:!border-indigo-500 transition-all px-8",
-                                        input: "text-xl placeholder:text-gray-300",
+                                        base: "peer",
+                                        inputWrapper: "h-20 border-2 border-indigo-100 hover:border-indigo-300 data-[focus=true]:!border-indigo-400 transition-all px-8 bg-white !outline-none !ring-0 data-[focus=true]:!ring-0",
+                                        input: "text-xl placeholder:text-gray-300 !outline-none",
                                     }}
                                 />
                             </div>
@@ -124,18 +127,22 @@ export const Hero = () => {
                     </div>
 
                     {/* Floating Element: Voice to Book */}
-                    <div className="hidden lg:block absolute -right-32 top-1/2 -translate-y-1/2">
+                    <div className="hidden lg:block fixed right-0 top-1/2 -translate-y-1/2 z-50">
                         <motion.div
                             animate={{ y: [0, -10, 0] }}
-                            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                            className="bg-white p-4 rounded-2xl shadow-xl border border-gray-100 flex items-center gap-3"
+                            whileHover={{ x: -10 }}
+                            transition={{
+                                y: { repeat: Infinity, duration: 4, ease: "easeInOut" },
+                                x: { duration: 0.2 }
+                            }}
+                            className="bg-white p-4 rounded-l-2xl shadow-2xl border border-gray-100 flex items-center gap-4 cursor-pointer"
                         >
-                            <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center text-white">
-                                <Plus className="w-6 h-6" />
-                            </div>
                             <div>
-                                <p className="text-xs font-bold text-indigo-600">Voice to Book</p>
-                                <p className="text-[10px] text-white bg-emerald-500 px-1.5 py-0.5 rounded-full inline-block font-bold">NEW</p>
+                                <p className="text-sm font-bold text-indigo-600 leading-none mb-1">Voice to Book</p>
+                                <p className="text-[10px] text-white bg-emerald-500 px-2 py-0.5 rounded-full inline-block font-bold uppercase tracking-wider">NEW</p>
+                            </div>
+                            <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center text-white shadow-lg">
+                                <Plus className="w-6 h-6" />
                             </div>
                         </motion.div>
                     </div>
